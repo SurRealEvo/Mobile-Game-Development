@@ -1,12 +1,19 @@
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController2D : MonoBehaviour
 {
     public Camera mainCamera;
 
+    [Header("Movement Feel")]
+    public float maxSpeed = 5f;
+    public float weight = 0.25f;
+
     private Vector3 offset;
+    private Vector3 velocity;
     private float screenDepth;
+    private bool isDragging;
 
     void Awake()
     {
@@ -14,47 +21,55 @@ public class PlayerController2D : MonoBehaviour
             mainCamera = Camera.main;
     }
 
-    void Start()
-    {
-        Debug.Log("PlayerController2D is running!");
-    }
-
-    void OnMouseDown()
-    {
-        Debug.Log("Player clicked!");
-        screenDepth = mainCamera.WorldToScreenPoint(transform.position).z;
-
-        Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenDepth)
-        );
-
-        offset = transform.position - mouseWorldPosition;
-    }
-
-    void OnMouseDrag()
-    {
-        Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenDepth)
-        );
-
-        transform.position = mouseWorldPosition + offset;
-    }
-
-
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("Mouse clicked at: " + Input.mousePosition);
+        if (Mouse.current == null || mainCamera == null)
+            return;
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+
+        if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            Ray ray = mainCamera.ScreenPointToRay(mousePosition);
             RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
 
-            if (hit.collider != null)
-                Debug.Log("Hit object: " + hit.collider.gameObject.name);
-            else
-                Debug.Log("Nothing hit by camera ray.");
+            if (hit.collider != null &&
+                hit.collider.gameObject == gameObject)
+            {
+                isDragging = true;
+
+                screenDepth = mainCamera
+                    .WorldToScreenPoint(transform.position).z;
+
+                Vector3 mouseWorld = mainCamera.ScreenToWorldPoint(
+                    new Vector3(mousePosition.x, mousePosition.y,
+                                screenDepth));
+
+                offset = transform.position - mouseWorld;
+                velocity = Vector3.zero;
+            }
+        }
+
+        if (Mouse.current.leftButton.wasReleasedThisFrame)
+        {
+            isDragging = false;
+        }
+
+        if (isDragging)
+        {
+            Vector3 mouseWorld = mainCamera.ScreenToWorldPoint(
+                new Vector3(mousePosition.x, mousePosition.y,
+                            screenDepth));
+
+            Vector3 target = mouseWorld + offset;
+
+            transform.position = Vector3.SmoothDamp(
+                transform.position,
+                target,
+                ref velocity,
+                weight,
+                maxSpeed
+            );
         }
     }
-
 }

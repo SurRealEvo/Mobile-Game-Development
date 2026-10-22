@@ -1,9 +1,0 @@
-Wipe Slash (current name not final)
-
-The game is intended for mobile, landscape and it will be ported to IOS first with eventually an android port too. 
-
-In the game you spawn in a room where the player is locked and enemies ambush him with the purpose to kill him. Your goal is to last as long as you can in the room.
-The player will be controlled through drag and control and flicks. The speed of the flicks will matter for the actions the player will want to take, which can be either attack, dodge or simply reposition.
-Chaining combos will be part of the gameplay loop, where creating longer chains gives a higher score to the player. If the player dies he can get upgrades for future runs with the currency he accumulates based on enemy kills and types of enemies he kills. 
-
-This game is intended for the times in between, such as on transport on the way to somewhere or when waiting for an appointment. Anyone can play the game but game is mainly intended for teens.

@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
+
+    private bool attackMovementOverride;
  
     private void Awake()
     {
@@ -37,6 +39,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (attackMovementOverride)
+            return;
+
+
         rb.linearVelocity = moveInput * moveSpeed;
+    }
+
+    public void SetAttackMovementOverride(bool isActive)
+    {
+        attackMovementOverride = isActive;
+        rb.linearVelocity = Vector2.zero;
     }
 }

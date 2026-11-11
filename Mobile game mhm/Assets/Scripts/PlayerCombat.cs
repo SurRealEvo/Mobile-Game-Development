@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     [Header("Combat Settings")]
-    [SerializeField] private float dashSpeed = 12f;
+    [SerializeField] private float dashSpeed = 24f;
     [SerializeField] private float dashDuration = 0.16f;
 
     private Rigidbody2D rb;
@@ -51,6 +51,11 @@ public class PlayerCombat : MonoBehaviour
             return;
 
         StartDash(direction);
+    }
+
+    public void TryParry()
+    {
+        Debug.Log("parrryyyyyyyy");
     }
     private void StartDash(Vector2 direction)
     {

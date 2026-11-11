@@ -33,18 +33,21 @@ public class SwipeInput : MonoBehaviour
 
     private void BeginTouch(Vector2 position, int touchId)
     {
+        if (position.x <= Screen.width / 2f)
+            return;
+
         isTouching = true;
         startPosition = position;
         trackedTouchId = touchId;
-        Debug.Log("Touch began: " + touchId);
+        
     }
 
     private void EndTouch(Vector2 position)
     {
-        isTouching = false;
+        
         endPosition = position;
         Vector2 swipeDirection = endPosition - startPosition;
-        Debug.Log("Touch ended");
+       
 
         if (swipeDirection.magnitude > swipeThreshold)
         {
@@ -54,23 +57,24 @@ public class SwipeInput : MonoBehaviour
         }
         else
         {
-            Debug.Log("Tap detected!");
+            playerCombat.TryParry();
         }
 
+        isTouching = false;
+        trackedTouchId = -1;
     }
 
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         
-        foreach (var touch in UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches)
+        foreach (Touch touch in Touch.activeTouches)
         {
-            Debug.Log("Phase: " + touch.phase +
-          " Position: " + touch.screenPosition);
+            
             if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began && touch.screenPosition.x > Screen.width / 2f && !isTouching)
             {
-                BeginTouch(touch.screenPosition, touch.touchId);
+                BeginTouch(touch.startScreenPosition, touch.touchId);
             }
 
             if (isTouching && touch.touchId == trackedTouchId)

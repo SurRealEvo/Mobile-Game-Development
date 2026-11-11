@@ -12,19 +12,23 @@ public class SwipeInput : MonoBehaviour
 
     private float swipeThreshold = 50f;
 
+    private PlayerCombat playerCombat;
+
     private void Awake() 
     {
-        
+        playerCombat = GetComponent<PlayerCombat>();
     }
 
     private void OnEnable()
     {
         EnhancedTouchSupport.Enable();
+        
     }
 
     private void OnDisable()
     {
         EnhancedTouchSupport.Disable();
+        
     }
 
     private void BeginTouch(Vector2 position, int touchId)
@@ -32,6 +36,7 @@ public class SwipeInput : MonoBehaviour
         isTouching = true;
         startPosition = position;
         trackedTouchId = touchId;
+        Debug.Log("Touch began: " + touchId);
     }
 
     private void EndTouch(Vector2 position)
@@ -39,11 +44,13 @@ public class SwipeInput : MonoBehaviour
         isTouching = false;
         endPosition = position;
         Vector2 swipeDirection = endPosition - startPosition;
+        Debug.Log("Touch ended");
 
         if (swipeDirection.magnitude > swipeThreshold)
         {
             swipeDirection = swipeDirection.normalized;
-            Debug.Log(swipeDirection);
+            playerCombat.TryStartDash(swipeDirection);
+            Debug.Log("Swipe detected: " + swipeDirection);
         }
         else
         {
@@ -56,8 +63,11 @@ public class SwipeInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         foreach (var touch in UnityEngine.InputSystem.EnhancedTouch.Touch.activeTouches)
         {
+            Debug.Log("Phase: " + touch.phase +
+          " Position: " + touch.screenPosition);
             if (touch.phase == UnityEngine.InputSystem.TouchPhase.Began && touch.screenPosition.x > Screen.width / 2f && !isTouching)
             {
                 BeginTouch(touch.screenPosition, touch.touchId);

@@ -26,7 +26,7 @@ public class PlayerCombat : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isAttacking)
         {
-            StartDash(Vector2.right);
+            StartDash(swipeDirection);
         }
     }
 
@@ -45,6 +45,13 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    public void TryStartDash(Vector2 direction)
+    {
+        if (isAttacking)
+            return;
+
+        StartDash(direction);
+    }
     private void StartDash(Vector2 direction)
     {
         isAttacking = true;

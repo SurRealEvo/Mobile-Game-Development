@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
     [UnitHeaderInspectable("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
-    [SerializeField] private InputActionReference moveAction;
+    
     [SerializeField] private FloatingJoystick joystick;
 
     private Rigidbody2D rb;
@@ -22,15 +22,6 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void OnEnable()
-    {
-        moveAction.action.Enable();
-    }
-
-    private void OnDisable()
-    {
-        moveAction.action.Disable();
-    }
     void Update()
     {
         moveInput = Vector2.ClampMagnitude(

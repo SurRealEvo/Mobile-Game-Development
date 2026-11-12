@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [UnitHeaderInspectable("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private InputActionReference moveAction;
+    [SerializeField] private FloatingJoystick joystick;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -33,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         moveInput = Vector2.ClampMagnitude(
-            moveAction.action.ReadValue<Vector2>(), 1f
+            joystick.Direction, 1f
             );
     }
 

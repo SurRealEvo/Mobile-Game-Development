@@ -6,6 +6,7 @@ public class FloatingJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler
     [SerializeField] private RectTransform joystickBackground;
     [SerializeField] private RectTransform joystickHandle;
     private RectTransform inputArea;
+    public Vector2 Direction { get; private set; }
 
     private void Awake()
     {
@@ -14,7 +15,8 @@ public class FloatingJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         Vector2 localPoint;
-        
+
+        joystickBackground.gameObject.SetActive(true);
 
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
             inputArea,
@@ -44,10 +46,14 @@ public class FloatingJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler
         localPoint,
         joystickBackground.rect.width / 2
         );
+
+        Direction = joystickHandle.anchoredPosition.normalized;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-
+        joystickBackground.gameObject.SetActive(false);
+        joystickHandle.anchoredPosition = Vector2.zero;
+        Direction = Vector2.zero;
     }
 }

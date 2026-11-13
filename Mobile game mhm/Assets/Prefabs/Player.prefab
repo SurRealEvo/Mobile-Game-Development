@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7863527499039939011}
   - component: {fileID: 8795453378426708028}
   - component: {fileID: 3224560073957802296}
+  - component: {fileID: 3459620368093110138}
+  - component: {fileID: 8355081451540932935}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -181,3 +183,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
   moveAction: {fileID: 6669356376158067184, guid: 5c592224018356d47b24fe47326d2928, type: 3}
+--- !u!114 &3459620368093110138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6566241154988851943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 488743980081b0c46a5b79d991b8ed01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCombat
+  dashSpeed: 12
+  dashDuration: 0.16
+--- !u!114 &8355081451540932935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6566241154988851943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4d6dd774b80ae44b97783b416a3f982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwipeInput

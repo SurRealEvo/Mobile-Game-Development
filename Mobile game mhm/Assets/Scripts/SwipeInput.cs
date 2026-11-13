@@ -10,7 +10,7 @@ public class SwipeInput : MonoBehaviour
     private bool isTouching = false;
     private int trackedTouchId = -1;
 
-    private float swipeThreshold = 50f;
+    [SerializeField]private float swipeThreshold = 100f;
 
     private PlayerCombat playerCombat;
 

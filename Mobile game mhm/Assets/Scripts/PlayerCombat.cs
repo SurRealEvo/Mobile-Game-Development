@@ -8,6 +8,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float dashDuration = 0.16f;
 
     [SerializeField] private AttackHitbox attackHitbox;
+    [SerializeField] private float hitboxOffset = 0.7f;
 
     private Rigidbody2D rb;
     private PlayerMovement playerMovement;
@@ -64,6 +65,8 @@ public class PlayerCombat : MonoBehaviour
         isAttacking = true;
         dashTimer = dashDuration;
         dashDirection = direction.normalized;
+        attackHitbox.transform.position =
+            transform.position + (Vector3)(dashDirection * 0.7f);
         attackHitbox.EnableHitbox();
 
         playerMovement.SetAttackMovementOverride(true);

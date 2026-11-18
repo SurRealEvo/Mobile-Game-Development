@@ -8,7 +8,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float dashDuration = 0.16f;
 
     [SerializeField] private AttackHitbox attackHitbox;
-    [SerializeField] private float hitboxOffset = 0.7f;
+  
 
     private Rigidbody2D rb;
     private PlayerMovement playerMovement;

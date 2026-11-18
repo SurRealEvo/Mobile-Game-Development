@@ -16,7 +16,7 @@ public class AttackHitbox : MonoBehaviour
 
         if (enemy != null)
         {
-            enemy.TakeDamage(25);
+            enemy.TakeDamage(50);
         }
     }
     public void EnableHitbox()

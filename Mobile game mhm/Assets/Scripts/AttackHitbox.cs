@@ -2,6 +2,14 @@ using UnityEngine;
 
 public class AttackHitbox : MonoBehaviour
 {
+    private Collider2D hitboxCollider;
+
+    private void Awake()
+    {
+        hitboxCollider = GetComponent<Collider2D>();
+        hitboxCollider.enabled = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         EnemyHealth enemy = other.GetComponent<EnemyHealth>();
@@ -10,5 +18,14 @@ public class AttackHitbox : MonoBehaviour
         {
             enemy.TakeDamage(25);
         }
+    }
+    public void EnableHitbox()
+    {
+        hitboxCollider.enabled = true;
+    }
+
+    public void DisableHitbox()
+    {
+        hitboxCollider.enabled = false;
     }
 }

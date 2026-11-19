@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8628042345133665915}
   - component: {fileID: 1135408564695319268}
   - component: {fileID: 3387890112953603548}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,7 +181,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 100
-  scoreManager: {fileID: 0}
 --- !u!114 &3387890112953603548
 MonoBehaviour:
   m_ObjectHideFlags: 0

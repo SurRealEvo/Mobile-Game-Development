@@ -7,6 +7,9 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float dashSpeed = 24f;
     [SerializeField] private float dashDuration = 0.16f;
 
+    [SerializeField] private AttackHitbox attackHitbox;
+  
+
     private Rigidbody2D rb;
     private PlayerMovement playerMovement;
 
@@ -62,6 +65,9 @@ public class PlayerCombat : MonoBehaviour
         isAttacking = true;
         dashTimer = dashDuration;
         dashDirection = direction.normalized;
+        attackHitbox.transform.position =
+            transform.position + (Vector3)(dashDirection * 0.7f);
+        attackHitbox.EnableHitbox();
 
         playerMovement.SetAttackMovementOverride(true);
     }
@@ -70,7 +76,9 @@ public class PlayerCombat : MonoBehaviour
     {
         isAttacking = false;
         rb.linearVelocity = Vector2.zero;
+        attackHitbox.DisableHitbox();
 
         playerMovement.SetAttackMovementOverride(false);
+
     }
 }

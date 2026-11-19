@@ -4,12 +4,13 @@ using UnityEngine.InputSystem;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 100;
-    [SerializeField] private ScoreManager scoreManager;
+     private ScoreManager scoreManager;
     private int currentHealth;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    private void Awake()
     {
         currentHealth = maxHealth;
+        scoreManager = FindFirstObjectByType<ScoreManager>();
     }
 
     // Update is called once per frame
